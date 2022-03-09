@@ -11,18 +11,20 @@
 class Solution {
 public:
     ListNode* deleteDuplicates(ListNode* head) {
-        if(!head) return NULL;
-        if(!head->next) return head;
-        int key = head->val;
-        ListNode* p=head->next;
-        
-        if(p && p->val!=key){
-            head->next=deleteDuplicates(p);
-            return head;
+        map<int,int> mp;
+        ListNode* temp=head;
+        while(temp!=NULL){
+            mp[temp->val]+=1;
+            temp=temp->next;
         }
-        else{
-            while(p && p->val==key) p=p->next;
-            return deleteDuplicates(p);
+        ListNode* newhead = new ListNode(0);
+        ListNode* temp1=newhead;
+        for(auto it=mp.begin(); it!=mp.end(); it++){
+            if(it->second == 1){
+                temp1->next = new ListNode(it->first);
+                temp1=temp1->next;
+            }
         }
+        return newhead->next;
     }
 };
