@@ -7,11 +7,11 @@ public:
             if(nums[mid]==target){
                 return 1;
             }
-            else if((nums[mid]==nums[e]) && (nums[mid]==nums[s])){
+            if(nums[s]==nums[mid] && nums[e]==nums[mid]){
                 e--;s++;
             }
             else if(nums[s]<=nums[mid]){
-                if(target<nums[mid] && nums[s]<=target){
+                if(target>=nums[s] && target<nums[mid]){
                     e=mid-1;
                 }
                 else{
@@ -19,7 +19,7 @@ public:
                 }
             }
             else{
-                if(target<=nums[e] && target>nums[mid]){
+                if(target>nums[mid] && target<=nums[e]){
                     s=mid+1;
                 }
                 else{
