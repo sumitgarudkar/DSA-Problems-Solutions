@@ -10,18 +10,17 @@
  * };
  */
 class Solution {
-    void help(TreeNode* root, int &count){
+    void solve(TreeNode* root, int &count){
         if(root==NULL) return;
-        help(root->right,count);
-        count += root->val;
-        root->val = count;
-        help(root->left,count);
+        solve(root->right, count);
+        count+=root->val;
+        root->val=count;
+        solve(root->left,count);
     }
-    
 public:
     TreeNode* convertBST(TreeNode* root) {
         int count=0;
-        help(root,count);
+        solve(root, count);
         return root;
     }
 };
