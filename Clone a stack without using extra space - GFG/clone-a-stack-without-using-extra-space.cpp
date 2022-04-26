@@ -8,11 +8,21 @@ using namespace std;
 //User function Template for C++
 
 class Solution{
+    void help(stack<int>& st, stack<int>& cloned){
+        if(st.empty()) return;
+        int num=st.top();
+        st.pop();
+        help(st,cloned);
+        cloned.push(num);
+    }
+    
     public:
     void clonestack(stack<int> st, stack<int>& cloned)
     {
         //code here
-        cloned=st;
+        help(st,cloned);
+        return;
+        
     }
 };
 
