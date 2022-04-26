@@ -9,13 +9,17 @@ using namespace std;
 //User function Template for C++
 
 class Solution{
+    void help(stack<int> st, vector<int> &res){
+        if(st.empty()) return;
+        int num = st.top();
+        res.push_back(num);
+        st.pop();
+        help(st,res);
+    }
 public:
-    vector<int> Reverse(stack<int> st){
+    vector<int> Reverse(stack<int> St){
         vector<int> res;
-        while(!st.empty()){
-            res.push_back(st.top());
-            st.pop();
-        }
+        help(St,res);
         return res;
     }
 };
