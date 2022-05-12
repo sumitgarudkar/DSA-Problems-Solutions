@@ -1,23 +1,22 @@
 class Solution {
-set<vector<int>> res;
-private: 
-    void help(vector<int> &nums, int i, int n){
+public:
+    set<vector<int>> ans;
+    void solve(int i, int n, vector<int> &nums){
         if(i==n){
-            res.insert(nums);
+            ans.insert(nums);
             return;
         }
-        for(int j=i; j<nums.size(); j++){
+        
+        for(int j=i; j<=n; j++){
             swap(nums[i],nums[j]);
-            help(nums,i+1,n);
+            solve(i+1,n,nums);
             swap(nums[i],nums[j]);
         }
-    } 
+    }
     
-public:
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        help(nums,0,nums.size()-1);
-        vector<vector<int>> ans;
-        for(auto x:res) ans.push_back(x);
-        return ans;
+        solve(0,nums.size()-1,nums);
+        vector<vector<int>> res(ans.begin(),ans.end());
+        return res;
     }
 };
