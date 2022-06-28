@@ -11,14 +11,13 @@
  */
 class Solution {
 public:
-    bool check(TreeNode* root, long long sbsmaller, long long sbgreater){
-        if(root==NULL) return 1;
-        if(root->val >= sbsmaller || root->val <= sbgreater) return 0;
-        
-        return (check(root->left, root->val, sbgreater)&&check(root->right, sbsmaller, root->val));
+    bool help(TreeNode* root, long long floor, long long ceiling){
+        if(!root) return true;
+        if(root->val <= floor || root->val >= ceiling) return false;
+        return (help(root->left, floor, root->val) && help(root->right, root->val, ceiling));
     }
     
     bool isValidBST(TreeNode* root) {
-        return check(root, LLONG_MAX, LLONG_MIN);
+        return help(root,LONG_LONG_MIN,LONG_LONG_MAX);
     }
 };
