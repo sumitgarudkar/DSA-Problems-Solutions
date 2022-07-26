@@ -1,17 +1,17 @@
 class Solution {
-    int help(int n, vector<int> &nums, vector<int> &dp){
-        if(n>=nums.size()-1) return 1;
-        if(nums[n]==0) return dp[n]=0;
-        if(dp[n]!=-1) return dp[n];
-        for(int m=1; m<=nums[n]; m++){
-            if(help(m+n,nums,dp)) return dp[n]=1;
-        }
-        return dp[n]=0;
-    }
-    
 public:
     bool canJump(vector<int>& nums) {
-        vector<int> dp(nums.size()+1,-1);
-        return help(0,nums,dp);
+        int n=nums.size();
+        vector<int> dp(n+1,0);
+        dp[n-1]=1;
+        for(int i=n-2; i>=0; i--){
+            for(int j=1; j<=nums[i]&&j+i<n; j++){
+                if(dp[j+i]){
+                    dp[i]=true;
+                    break;
+                }
+            }
+        }
+        return dp[0];
     }
 };
