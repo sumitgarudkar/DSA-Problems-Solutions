@@ -1,6 +1,7 @@
 class MinStack {
 public:
-    stack<int> s1,s2;
+    stack<int> s1;
+    stack<int> s2;
     MinStack() {
         
     }
@@ -11,7 +12,7 @@ public:
     }
     
     void pop() {
-        if(s1.top() == getMin()) s2.pop();
+        if(top()==getMin()) s2.pop();
         s1.pop();
     }
     
